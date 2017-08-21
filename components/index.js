@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, SliderIOS } from 'react-native'
-import { Button, Text, Picker, Item } from 'native-base'
+import { StyleSheet, View, Image, ScrollView } from 'react-native'
+import { Button, Text, Picker, Item, Form, ListItem, CheckBox, Body } from 'native-base'
+import SelectMultiple from 'react-native-select-multiple'
 
 import MultiSlider from './slider'
 import customMarker from './customMarker'
 import SearchResult from './searchResult'
+import SubjectDropDown from './subjectDropDown';
 
+const fruits = ['Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears']
 export default class kits_tutor extends Component {
 constructor (props) {
     super(props)
@@ -45,38 +48,24 @@ constructor (props) {
     })
   }
 
-  onValueChange2 = (value) => {
-    this.setState({
-      selected2: value
-    });
+  onSelectionsChange = (selectedFruits) => {
+    // selectedFruits is array of { label, value }
+    this.setState({ selectedFruits })
   }
 
   render () {
     return (
-      <View style={styles.container}>
-        <Image source={require('.././images/kitstutorlogo.jpg')} />
+      <View style={styles.container}> 
         <Image source={require('.././images/job_setting.jpg')} />
-        <View style={{paddingTop:30, alignItems:'flex-start'}}>
+
             <Text style={styles.text}>時薪 {this.state.salary}</Text>
             <MultiSlider values={[1,35]} sliderLength={300} onValuesChange={this.salaryValuesChange} min={1} max={35}/>  
-            <Text style={styles.dynamic}></Text> 
             <Text style={styles.text}>年級 {this.state.year}</Text>
             <MultiSlider values={[0,11]} sliderLength={300} onValuesChange={this.yearValuesChange} min={0} max={11}/>    
-            <Text style={styles.dynamic}></Text>
-            <Picker
-              mode="dropdown"
-              placeholder="請選擇補習科目"
-              note={false}
-              selectedValue={this.state.selected2}
-              onValueChange={this.onValueChange2.bind(this)}
-            >
-              <Item label="Wallet" value="key0" />
-              <Item label="ATM Card" value="key1" />
-              <Item label="Debit Card" value="key2" />
-              <Item label="Credit Card" value="key3" />
-              <Item label="Net Banking" value="key4" />
-            </Picker>
-
+           
+            <View style={{height:200, paddingBottom:30}}>
+            <SubjectDropDown/>
+            </View>
             <Button block
             onPress={() => {this.props.navigator.push({
                 component:SearchResult
@@ -87,7 +76,7 @@ constructor (props) {
                 搜尋
             </Text>
             </Button>
-        </View>
+
       </View>
     )
   }
