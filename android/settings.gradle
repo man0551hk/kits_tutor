@@ -1,0 +1,3 @@
+rootProject.name = 'kits_tutor'
+
+include ':app'
