@@ -1,111 +1,58 @@
-import React, { Component } from 'react';
-import {ScrollView} from 'react-native'
-import {
-	Container,
-	Header,
-	Title,
-	Content,
-	Button,
-	Icon,
-	List,
-	ListItem,
-	CheckBox,
-	Text,
-	Left,
-	Right,
-    Body
-} from 'native-base';
-
+'use strict'
+import React, { Component } from 'react'
+import { View, ScrollView } from 'react-native'
+import { Button, Text } from 'native-base'
+import MultipleChoice from 'react-native-multiple-choice'
 
 export default class SubjectDropDownd extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			checkbox1: true,
-			checkbox2: true,
-			checkbox3: true,
-			checkbox4: false,
-		};
-	}
+  constructor (props) {
+    super(props)
+  }
 
-	toggleSwitch1() {
-		this.setState({
-			checkbox1: !this.state.checkbox1,
-		});
-	}
+  closeModal () {
+    this.props.closeMethod()
+  }
 
-	toggleSwitch2() {
-		this.setState({
-			checkbox2: !this.state.checkbox2,
-		});
-	}
+  setSelectedSubject (items) {
+	//this.props.setSelectedSubject(items)
+  }
 
-	toggleSwitch3() {
-		this.setState({
-			checkbox3: !this.state.checkbox3,
-		});
-	}
+  subjects = [ '中文','英文',
+										'數學',
+										'數學(M1)',
+										'數學(M2)',
+										'物理',
+										'化學',
+										'生物',
+										'中史',
+										'西史',
+										'地理',
+										'中國文學',
+										'英國文學',
+										'經濟',
+										'會計(BAFS)',
+										'通識',
+										'普通話',
+										'英文會話',
+										'日文',
+										'全科'		  ]
 
-	toggleSwitch4() {
-		this.setState({
-			checkbox4: !this.state.checkbox4,
-		});
-	}
-
-	render() {
-		return (
-            <ScrollView style={{width:300}}>
-                 <Text>科目</Text>
-					<ListItem button onPress={() => this.toggleSwitch1()}>
-						<CheckBox checked={this.state.checkbox1} onPress={() => this.toggleSwitch1()} />
-						<Body>
-							<Text>Lunch Break</Text>
-						</Body>
-					</ListItem>
-					<ListItem button onPress={() => this.toggleSwitch2()}>
-						<CheckBox color="red" checked={this.state.checkbox2} onPress={() => this.toggleSwitch2()} />
-						<Body>
-							<Text>Daily Stand Up</Text>
-						</Body>
-					</ListItem>
-					<ListItem button onPress={() => this.toggleSwitch3()}>
-						<CheckBox color="green" checked={this.state.checkbox3} onPress={() => this.toggleSwitch3()} />
-						<Body>
-							<Text>Finish list Screen</Text>
-						</Body>
-					</ListItem>
-					<ListItem button onPress={() => this.toggleSwitch4()}>
-						<CheckBox color="#000" checked={this.state.checkbox4} onPress={() => this.toggleSwitch4()} />
-						<Body>
-							<Text>Discussion with Client</Text>
-						</Body>
-					</ListItem>
-                    <ListItem button onPress={() => this.toggleSwitch4()}>
-						<CheckBox color="#000" checked={this.state.checkbox4} onPress={() => this.toggleSwitch4()} />
-						<Body>
-							<Text>Discussion with Client</Text>
-						</Body>
-					</ListItem>
-                    <ListItem button onPress={() => this.toggleSwitch4()}>
-						<CheckBox color="#000" checked={this.state.checkbox4} onPress={() => this.toggleSwitch4()} />
-						<Body>
-							<Text>Discussion with Client</Text>
-						</Body>
-					</ListItem>
-                    <ListItem button onPress={() => this.toggleSwitch4()}>
-						<CheckBox color="#000" checked={this.state.checkbox4} onPress={() => this.toggleSwitch4()} />
-						<Body>
-							<Text>Discussion with Client</Text>
-						</Body>
-					</ListItem>
-                    <ListItem button onPress={() => this.toggleSwitch4()}>
-						<CheckBox color="#000" checked={this.state.checkbox4} onPress={() => this.toggleSwitch4()} />
-						<Body>
-							<Text>Discussion with Client</Text>
-						</Body>
-					</ListItem>
-            </ScrollView>
-		);
-	}
+  render () {
+    return (
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+		  <ScrollView>
+        <MultipleChoice
+          options={this.subjects}
+		selectedOptions={[]}
+          maxSelectedOptions={3}
+          onSelection={(option) => this.setSelectedSubject(option)} />
+		  </ScrollView>
+        <Button primary block onPress={() => this.closeModal()}>
+          <Text>
+            確定
+          </Text>
+        </Button>
+      </View>
+    )
+  }
 }
-
