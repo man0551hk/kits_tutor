@@ -7,14 +7,16 @@
     "test": "jest"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "native-base": "^2.3.1",
     "react": "16.0.0-alpha.12",
-    "react-native": "0.47.1",
+    "react-native": "0.46.4",
+    "react-native-multi-slider": "^0.3.5",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",
-    "babel-preset-react-native": "3.0.0",
+    "babel-preset-react-native": "2.1.0",
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12"
   },
