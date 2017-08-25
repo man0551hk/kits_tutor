@@ -7,19 +7,23 @@ import MultiSlider from './slider'
 import customMarker from './customMarker'
 import SearchResult from './searchResult'
 import SubjectDropDown from './subjectDropDown';
-
+import LocationDropDown from './locationDropDown';
 export default class kits_tutor extends Component {
   constructor(props) {
     super(props)
     this.state = ({
       salary: '$50 - $400',
-      startSalary: 0,
-      endSalary: 0,
+      startSalary: 50,
+      endSalary: 400,
       year: 'P.1 - F.6',
-      startYear: 0,
-      endYear: 0,
-      selectedSubject: '',
-      isModalVisible: false
+      startYear: 'P.1',
+      endYear: 'F.6',
+      selectedSubject: [],
+      selectedSubjectText: '請選擇科目',
+      selectedLocation: [],
+      selectedLocationText: '請選擇地區',
+      isModalVisible: false,
+      isLocationModalVisible: false
     });
   }
 
@@ -58,16 +62,44 @@ export default class kits_tutor extends Component {
   }
 
   selectedItem = (selectedItems) => {
-    this.setState({
-      selectedSubject: selectedItems
-    })
+    if (selectedItems.length > 0) {
+      this.setState(
+        {
+          selectedSubject: [],
+          selectedSubjectText: ''
+        }
+      )
+      this.setState({
+        selectedSubject: selectedItems,
+        selectedSubjectText: selectedItems.join(',')
+      })
+    }
   }
+
+  selectedLocationItem = (selectedLocationItems) => {
+    if (selectedLocationItems.length > 0) {    
+      this.setState(
+        {
+          selectedLocation: [],
+          selectedLocationText: ''
+        }
+      )
+
+      this.setState({
+        selectedLocation: selectedLocationItems,
+        selectedLocationText: selectedLocationItems.join(',')
+      })
+    }
+  }
+
 
   _showModal = () => this.setState({isModalVisible: true})
 
   _hideModal = () => this.setState({isModalVisible: false})
 
-
+  _showLocationModal = () => this.setState({isLocationModalVisible: true})
+  
+  _hideLocationModal = () => this.setState({isLocationModalVisible: false})
 
   render() {
     return (
@@ -89,9 +121,23 @@ export default class kits_tutor extends Component {
           min={0}
           max={11}/>
 
+        <View style={{paddingBottom:30}}>
+          <TouchableOpacity onPress={this._showLocationModal}>
+            <Text>{this.state.selectedLocationText}</Text>
+          </TouchableOpacity>
+          <Modal isVisible={this.state.isLocationModalVisible}>
+            <LocationDropDown
+              closeMethod={this
+              ._hideLocationModal
+              .bind()}
+              setSelectedLocation={this.selectedLocationItem.bind()}
+              />
+          </Modal>
+        </View>
+
         <View>
           <TouchableOpacity onPress={this._showModal}>
-            <Text>請選擇科目</Text>
+            <Text>{this.state.selectedSubjectText}</Text>
           </TouchableOpacity>
           <Modal isVisible={this.state.isModalVisible}>
             <SubjectDropDown
@@ -101,23 +147,33 @@ export default class kits_tutor extends Component {
               setSelectedSubject={this.selectedItem.bind()}
               />
           </Modal>
-          <Text>{this.state.selectedSubject}</Text>
         </View>
-    
-        <Button
+
+
+
+        <View style={{width:320,paddingTop:30}}>
+        <Button 
           block
           onPress={() => {
           this
             .props
             .navigator
-            .push({component: SearchResult})
+            .push(
+              {
+                component: SearchResult, 
+                passProps:{
+                  startSalary: this.state.startSalary,
+                  endSalary: this.state.endSalary
+                }
+              }
+            )
         }}>
 
           <Text>
             搜尋
           </Text>
         </Button>
-
+        </View>
       </View>
     )
   }

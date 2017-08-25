@@ -4,17 +4,20 @@ import { View, ScrollView } from 'react-native'
 import { Button, Text } from 'native-base'
 import MultipleChoice from 'react-native-multiple-choice'
 
+let objItems = []
 export default class SubjectDropDownd extends Component {
   constructor (props) {
     super(props)
   }
 
   closeModal () {
+    this.props.setSelectedSubject(objItems)
+    objItems = []
     this.props.closeMethod()
   }
 
   setSelectedSubject (items) {
-	//this.props.setSelectedSubject(items)
+	  objItems.push(items)
   }
 
   subjects = [ '中文','英文',
