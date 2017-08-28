@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     },    
     left: {
         margin:5,
+        paddingLeft:12,
         flex:1,
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
     right: {
         margin:5,
         flex:1,
+        paddingRight:12,
         flexDirection: 'row',
         justifyContent: 'flex-end',
     },

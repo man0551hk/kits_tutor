@@ -16,8 +16,8 @@ export default class kits_tutor extends Component {
       startSalary: 50,
       endSalary: 400,
       year: 'P.1 - F.6',
-      startYear: 'P.1',
-      endYear: 'F.6',
+      startYear: '0',
+      endYear: '11',
       selectedSubject: [],
       selectedSubjectText: '請選擇科目',
       selectedLocation: [],
@@ -55,8 +55,8 @@ export default class kits_tutor extends Component {
     let _years = years[values[0]] + ' - ' + years[values[1]]
 
     this.setState({
-      startYear: years[values[0]],
-      endYear: years[values[1]],
+      startYear: values[0],
+      endYear: values[1],
       year: _years
     })
   }
@@ -66,13 +66,21 @@ export default class kits_tutor extends Component {
       this.setState(
         {
           selectedSubject: [],
-          selectedSubjectText: ''
+          selectedSubjectText: '請選擇科目'
         }
       )
       this.setState({
         selectedSubject: selectedItems,
         selectedSubjectText: selectedItems.join(',')
       })
+    }
+    else {
+      this.setState(
+        {
+          selectedSubject: [],
+          selectedSubjectText: '請選擇科目'
+        }
+      )
     }
   }
 
@@ -81,7 +89,7 @@ export default class kits_tutor extends Component {
       this.setState(
         {
           selectedLocation: [],
-          selectedLocationText: ''
+          selectedLocationText: '請選擇地區'
         }
       )
 
@@ -89,6 +97,14 @@ export default class kits_tutor extends Component {
         selectedLocation: selectedLocationItems,
         selectedLocationText: selectedLocationItems.join(',')
       })
+    }
+    else {
+      this.setState(
+        {
+          selectedLocation: [],
+          selectedLocationText: '請選擇地區'
+        }
+      )
     }
   }
 
@@ -122,6 +138,19 @@ export default class kits_tutor extends Component {
           max={11}/>
 
         <View style={{paddingBottom:30}}>
+          <TouchableOpacity onPress={this._showModal}>
+            <Text>{this.state.selectedSubjectText}</Text>
+          </TouchableOpacity>
+          <Modal isVisible={this.state.isModalVisible}>
+            <SubjectDropDown
+              closeMethod={this
+              ._hideModal
+              .bind()}
+              setSelectedSubject={this.selectedItem.bind()}
+              />
+          </Modal>
+        </View>
+        <View>
           <TouchableOpacity onPress={this._showLocationModal}>
             <Text>{this.state.selectedLocationText}</Text>
           </TouchableOpacity>
@@ -135,21 +164,6 @@ export default class kits_tutor extends Component {
           </Modal>
         </View>
 
-        <View>
-          <TouchableOpacity onPress={this._showModal}>
-            <Text>{this.state.selectedSubjectText}</Text>
-          </TouchableOpacity>
-          <Modal isVisible={this.state.isModalVisible}>
-            <SubjectDropDown
-              closeMethod={this
-              ._hideModal
-              .bind()}
-              setSelectedSubject={this.selectedItem.bind()}
-              />
-          </Modal>
-        </View>
-
-
 
         <View style={{width:320,paddingTop:30}}>
         <Button 
@@ -162,8 +176,12 @@ export default class kits_tutor extends Component {
               {
                 component: SearchResult, 
                 passProps:{
+                  startYear: this.state.startYear,
+                  endYear: this.state.endYear,
                   startSalary: this.state.startSalary,
                   endSalary: this.state.endSalary,
+                  selectedLocation: this.state.selectedLocation,
+                  selectedSubject: this.state.selectedSubject,
                   navigator: this.props.navigator
                 }
               }
