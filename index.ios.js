@@ -8,8 +8,10 @@ import Index from './components/index'
 export default class kits_tutor extends Component {
   render () {
     return (
-      <NavigatorIOS initialRoute={{ component: Index, title: 'Kits Tutor', passProps: null }} 
+      <NavigatorIOS 
+      initialRoute={{ component: Index, title: 'Kits Tutor', passProps: null, index:0 }} 
       renderScene={(route, navigator) => {
+
         let Component = route.component;
         return <Component {...route.params} navigator={navigator} />
       }}

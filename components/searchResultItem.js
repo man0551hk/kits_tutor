@@ -1,15 +1,36 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native'
 
-
-
+import SubmitForm from './submitForm'
 export default class SearchResult extends Component {
     constructor(props) {
       super(props)
     }
 
     GoToSubmit() { 
-        this.props.jumpSubmit()
+        this
+        .props
+        .navigator
+        .push(
+          {
+            component: SubmitForm, 
+            passProps:{
+                job_district: this.props.job_district,
+                job_address: this.props.job_address,
+                job_number: this.props.job_number,
+                job_hourrate: this.props.job_hourrate,
+                job_lng: this.props.job_lng,
+                job_lat: this.props.job_lat,
+                job_post_date: this.props.job_post_date,
+                job_stu_sex: this.props.job_stu_sex,
+                job_stu_subject: this.props.job_stu_subject,
+                job_time: this.props.job_time,
+                job_stu_level: this.props.job_stu_level,
+                job_rate_type: this.props.job_rate_type
+            },
+            title: 'Apply Form'
+          }
+        )
     }
 
     render () {

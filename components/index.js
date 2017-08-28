@@ -163,7 +163,8 @@ export default class kits_tutor extends Component {
                 component: SearchResult, 
                 passProps:{
                   startSalary: this.state.startSalary,
-                  endSalary: this.state.endSalary
+                  endSalary: this.state.endSalary,
+                  navigator: this.props.navigator
                 }
               }
             )

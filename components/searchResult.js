@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Image } from 'react-native'
+import {Button} from 'native-base'
 
 import SearchResultItem from './searchResultItem'
 import SubmitForm from './submitForm'
@@ -19,38 +20,20 @@ export default class SearchResult extends Component {
   }
 
   jumpSubmit() {
-
     this
     .props
     .navigator
     .push(
       {
         component: SubmitForm, 
-        passProps:null
+        passProps:null,
+        Title: 'Apply Form'
       }
     )
   }
  
   async getData() {
     var convert = require('xml-js');
-    // var xml =
-    // '<?xml version="1.0" encoding="utf-8"?>' +
-    // '<markers>' +
-    // ' <marker job_lng="114.14861" job_lat="22.33456" job_post_date="2017-08-25" job_number="25081706" job_hourrate="120" '+
-    // ' job_district="長沙灣" job_stu_sex="男" job_address="昇悅居(近荔枝角MTR)" lat="22.33456" lng="114.14861" ' +
-    // ' type="student" job_stu_secondary=""  job_stu_subject="補全科" ' +
-    // ' job_time="逢星期一,五,每堂1.5hr" job_stu_level="升P.4" job_rate_type="/HR" />' + 
-
-    // '<marker job_lng="0" job_lat="0" job_post_date="2017-08-25" job_number="25081705" job_hourrate="120" ' + 
-    // ' job_district="黃大仙" job_stu_sex="女" job_address="新莆崗衍慶大廈" lat="0" lng="0" ' + 
-    // ' type="student" job_stu_secondary=""  job_stu_subject="補英文" ' + 
-    // ' job_time="一星期一堂,每堂1.5-2hr" job_stu_level="升F.2" job_rate_type="/HR" /> ' + 
-    // '</markers>';
-    // var result1 = convert.xml2json(xml, {compact: true, spaces: 4});
-    // let json = JSON.parse(result1)
-    // alert(json.markers.marker[0]._attributes.job_lng)
-
-
     fetch('http://www.kits-tutor.com/2015/phpgetadvcontentbig5.php')
         .then(response => 
           response.text()
@@ -91,6 +74,8 @@ export default class SearchResult extends Component {
 
         if (job_hourrate >= startSalary && job_hourrate <= endSalary) {
           element.push( <SearchResultItem key={job_number} title={job_district + job_address} 
+            job_district={job_district}
+            job_address={job_address}
             job_number={job_number} 
             job_hourrate={job_hourrate} 
             job_lng={job_lng}
@@ -103,6 +88,7 @@ export default class SearchResult extends Component {
             job_rate_type={job_rate_type}
             index={i}
             jumpSubmit={this.jumpSubmit.bind()}
+            navigator={this.props.navigator}
             /> 
           )
         }
@@ -110,7 +96,8 @@ export default class SearchResult extends Component {
     }
       return (
         <ScrollView>
-          {this.state.isLoading && <View><Text>Loading...</Text></View>}
+          {/* <View><Button onPress={()=>this.jumpSubmit()}><Text>test</Text></Button></View> */}
+          {this.state.isLoading && <View style={{ flex: 1,paddingTop: 60,alignItems: 'center'}}><Image source={require('.././images/loading.gif')}/></View>}
           {element }
         </ScrollView>
       )
