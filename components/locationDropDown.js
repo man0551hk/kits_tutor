@@ -81,7 +81,7 @@ export default class LocationDropDownd extends Component {
           options={this.subjects}
 		selectedOptions={[]}
           maxSelectedOptions={3}
-          onSelection={(option) => this.setSelectedLocation(option)} />
+          onSelection={(option) => this.setSelectedLocation(option)} style = {{paddingLeft:10}} />
 		  </ScrollView>
         <Button primary block onPress={() => this.closeModal()}>
           <Text>

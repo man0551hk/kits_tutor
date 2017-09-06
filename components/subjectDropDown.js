@@ -48,7 +48,7 @@ export default class SubjectDropDownd extends Component {
           options={this.subjects}
 		selectedOptions={[]}
           maxSelectedOptions={3}
-          onSelection={(option) => this.setSelectedSubject(option)} />
+          onSelection={(option) => this.setSelectedSubject(option)} style = {{paddingLeft:10}}/>
 		  </ScrollView>
         <Button primary block onPress={() => this.closeModal()}>
           <Text>
