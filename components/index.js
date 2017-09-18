@@ -23,8 +23,27 @@ export default class kits_tutor extends Component {
       selectedLocation: [],
       selectedLocationText: '請選擇地區',
       isModalVisible: false,
-      isLocationModalVisible: false
+      isLocationModalVisible: false,
+      yearDefault: [0, 11]
     });
+  }
+
+  reset = () => {
+    this.setState({
+      salary: '$50 - $400',
+      startSalary: 50,
+      endSalary: 400,
+      year: 'P.1 - F.6',
+      startYear: '0',
+      endYear: '11',
+      selectedSubject: [],
+      selectedSubjectText: '請選擇科目',
+      selectedLocation: [],
+      selectedLocationText: '請選擇地區',
+      isModalVisible: false,
+      isLocationModalVisible: false,
+      yearDefault: [0, 11]
+    })
   }
 
   salaryValuesChange = (values) => {
@@ -124,6 +143,7 @@ export default class kits_tutor extends Component {
 
         <Text style={styles.text}>時薪 {this.state.salary}</Text>
         <MultiSlider
+          id = "salary_slider"
           values={[1, 35]}
           sliderLength={300}
           onValuesChange={this.salaryValuesChange}
@@ -131,7 +151,8 @@ export default class kits_tutor extends Component {
           max={35}/>
         <Text style={styles.text}>年級 {this.state.year}</Text>
         <MultiSlider
-          values={[0, 11]}
+          id = "year_slider"
+          values={this.state.yearDefault}
           sliderLength={300}
           onValuesChange={this.yearValuesChange}
           min={0}
@@ -192,6 +213,11 @@ export default class kits_tutor extends Component {
             搜尋
           </Text>
         </Button>
+        </View>
+        <View style={{width:320,paddingTop:30}}>
+          <Button block success onPress={ () => this.reset()}>
+            <Text>重設</Text>
+          </Button>
         </View>
       </View>
     )
