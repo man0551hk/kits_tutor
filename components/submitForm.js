@@ -23,25 +23,25 @@ export default class SubmitForm extends Component {
   render () {
     return (
       <Content style={styles.container}>
-        <View style={{paddingLeft:17}}>
+        <View style={{paddingLeft:14}}>
           <Text style={styles.bold}>
             個案內容
           </Text>
-          <Text>
+          <Text style={styles.caseFont}>
             {this.props.job_district}
             {this.props.job_address}
           </Text>
-          <Text>
+          <Text style={styles.caseFont}>
             {this.props.job_stu_level}
             {this.props.job_stu_sex}
           </Text>
-          <Text>
+          <Text style={styles.caseFont}>
             {this.props.job_stu_subject}
           </Text>
-          <Text>
+          <Text style={styles.caseFont}>
             {this.props.job_time}
           </Text>
-          <Text>
+          <Text style={styles.caseFont}>
             $
             {this.props.job_hourrate}
             {this.props.job_rate_type}
@@ -134,6 +134,7 @@ export default class SubmitForm extends Component {
         <View style={{paddingLeft:17, paddingRight:17, paddingTop:10}}>
         <Button block primary ><Text>應徵</Text></Button>
         </View>   
+        <View></View>
       </Content>
 
     )
@@ -157,5 +158,9 @@ const styles = StyleSheet.create({
   input: {
     borderBottomColor: '#F5A9A9',
     borderBottomWidth: 1
+  },
+  caseFont: {
+    fontSize:20,
+    color: 'red'
   }
 })
