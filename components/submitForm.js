@@ -5,19 +5,6 @@ import { Container, Header, Content, Form, Item, Input, Label, Button} from 'nat
 export default class SubmitForm extends Component {
   constructor (props) {
     super(props)
-    this.state = (
-      {
-        mobile: ''
-      }
-    )
-  }
-
-  saveMobile (text) {
-    this.setState(
-      {
-        mobile: text
-      }
-    )
   }
 
   render () {
@@ -51,28 +38,28 @@ export default class SubmitForm extends Component {
           <Item>
             <Input
               keyboardType='phone-pad'
-              onChangeText={(text) => this.saveMobile(text)}
+              ref= {(el) => { this.mobile = el; }} onChangeText={(mobile) => this.setState({mobile: mobile})}
               value={this.state.mobile}
               style={styles.input}
               placeholder='手提電話' />
           </Item>
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='導師姓名' />
           </Item>
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='個人簡介'  multiline={true} style={{height:200}}/>
           </Item>   
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='要求薪金'/>
@@ -82,7 +69,7 @@ export default class SubmitForm extends Component {
           </Text>  
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期一'/>
@@ -96,35 +83,35 @@ export default class SubmitForm extends Component {
           </Item>     
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期三'/>
           </Item>     
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期四'/>
           </Item>     
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期五'/>
           </Item>     
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期六'/>
           </Item>     
           <Item>
             <Input
-              onChangeText={(text) => this.saveMobile(text)}
+              //onChangeText={(text) => this.saveMobile(text)}
               value={this.state.mobile}
               style={styles.input}
               placeholder='星期日'/>
@@ -134,16 +121,14 @@ export default class SubmitForm extends Component {
         <View style={{paddingLeft:17, paddingRight:17, paddingTop:10}}>
         <Button block primary ><Text>應徵</Text></Button>
         </View>   
-        <View></View>
       </Content>
-
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 80
+
   },
   bold: {
     fontWeight: 'bold',
