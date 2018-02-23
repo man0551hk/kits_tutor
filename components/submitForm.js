@@ -25,17 +25,17 @@ export default class SubmitForm extends Component {
       'job_number': this.props.job_number,
       'case_content1': this.props.job_district + ' ' + this.props.job_address + this.props.job_stu_level + ' ' + this.props.job_stu_sex + ' ' + 
       this.props.job_stu_subject + ' ' + this.props.job_time + ' $' + this.props.job_hourrate + ' ' + this.props.job_rate_type,
-      'mobile': this.state.mobile,
-      'tutor_name': this.state.tutor_name,
-      'brief': this.state.brief,
-      'request_salary':  this.state.request_salary,
-      'monday': this.state.monday,
-      'tuesday': this.state.tuesday,
-      'wednesday': this.state.wednesday,
-      'thursday': this.state.thursday,
-      'friday': this.state.friday,
-      'saturday': this.state.saturday,
-      'sunday': this.state.sunday
+      'mobile': this.state.mobile !== undefined ? this.state.mobile : 0,
+      'tutor_name': this.state.tutor_name !== undefined ? this.state.tutor_name : '',
+      'brief': this.state.brief !== undefined ? this.state.brief : '',
+      'request_salary':  this.state.request_salary !== undefined ? this.state.request_salary : '',
+      'monday': this.state.monday !== undefined ? this.state.monday : '',
+      'tuesday': this.state.tuesday !== undefined ? this.state.tuesday : '',
+      'wednesday': this.state.wednesday !== undefined ? this.state.wednesday : '',
+      'thursday': this.state.thursday !== undefined ? this.state.thursday : '',
+      'friday': this.state.friday !== undefined ? this.state.friday : '',
+      'saturday': this.state.saturday !== undefined ? this.state.saturday : '',
+      'sunday': this.state.sunday !== undefined ? this.state.sunday : ''
     }
     var formBody = []
     for (var property in details) {
