@@ -21,45 +21,42 @@ export default class SubmitForm extends Component {
   }
 
   sendRequest() {
-    console.log('a')
-    // var details = {
-    //   'job_number': this.props.job_number,
-    //   'case_content1': this.props.job_district + ' ' + this.props.job_address + this.props.job_stu_level + ' ' + this.props.job_stu_sex + ' ' + 
-    //   this.props.job_stu_subject + ' ' + this.props.job_time + ' $' + this.props.job_hourrate + ' ' + this.props.job_rate_type,
-    //   'mobile': this.mobile,
-    //   'tutor_name': this.tutor_name,
-    //   'brief': this.brief,
-    //   'request_salary':  this.request_salary,
-    //   'monday': this.monday,
-    //   'tuesday': this.tuesday,
-    //   'wednesday': this.wednesday,
-    //   'thursday': this.thursday,
-    //   'friday': this.wednesfridayay,
-    //   'saturday': this.saturday,
-    //   'sunday': this.sunday
-    // }
-    // console.log(details)
-    // var formBody = []
-    // for (var property in details) {
-    //   var encodedKey = encodeURIComponent(property)
-    //   var encodedValue = encodeURIComponent(details[property])
-    //   formBody.push(encodedKey + "=" + encodedValue)
-    // }
-    // formBody = formBody.join("&")
-    // console.log(formBody)
-    
-    // fetch('http://localhost/job/tutorSumitJob1.php', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    //   body: formBody
-    // }).then(
-    //   response => response.text()
-    // ).then((response) => {
-    //   alert(response)
-    // }).done()
+    var details = {
+      'job_number': this.props.job_number,
+      'case_content1': this.props.job_district + ' ' + this.props.job_address + this.props.job_stu_level + ' ' + this.props.job_stu_sex + ' ' + 
+      this.props.job_stu_subject + ' ' + this.props.job_time + ' $' + this.props.job_hourrate + ' ' + this.props.job_rate_type,
+      'mobile': this.state.mobile,
+      'tutor_name': this.state.tutor_name,
+      'brief': this.state.brief,
+      'request_salary':  this.state.request_salary,
+      'monday': this.state.monday,
+      'tuesday': this.state.tuesday,
+      'wednesday': this.state.wednesday,
+      'thursday': this.state.thursday,
+      'friday': this.state.friday,
+      'saturday': this.state.saturday,
+      'sunday': this.state.sunday
+    }
+    var formBody = []
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property)
+      var encodedValue = encodeURIComponent(details[property])
+      formBody.push(encodedKey + "=" + encodedValue)
+    }
+    formBody = formBody.join("&")
+
+    fetch('http://www.liveforce-production.com/kits_tutor_mobile/tutorSumitJob1.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formBody
+    }).then(
+      response => response.text()
+    ).then((response) => {
+      // alert(response)
+    }).done()
   }
 
   render () {
@@ -160,11 +157,10 @@ export default class SubmitForm extends Component {
             onChangeText={sunday => this.setState({sunday: sunday})}
               style={styles.input}
               placeholder='星期日'/>
-          </Item>    
-                                                                                      
+          </Item>                                                                  
         </Form>
         <View style={{paddingLeft:17, paddingRight:17, paddingTop:10, paddingBottom: 30}}>
-          <Button block primary onPress={() => alert('a')}><Text>應徵</Text></Button>
+          <Button block primary onPress={() => this.sendRequest()}><Text>應徵</Text></Button>
         </View>
       </Content>
     )
