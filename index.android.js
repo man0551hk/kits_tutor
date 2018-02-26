@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { AppRegistry, Text, View, ScrollView, NavigatorIOS, StyleSheet } from 'react-native'
+import { AppRegistry, Text, View, ScrollView, StyleSheet } from 'react-native'
 import { Container, Content, Footer, FooterTab, Button, Icon } from 'native-base'
+import { Navigator } from 'react-native-deprecated-custom-components'
 import PropTypes from 'prop-types'
 
 import Index from './components/index'
@@ -8,7 +9,7 @@ import Index from './components/index'
 export default class kits_tutor extends Component {
   render () {
     return (
-      <NavigatorIOS 
+      <Navigator 
       initialRoute={{ component: Index, title: 'Kits Tutor', passProps: null, index:0 }} 
       renderScene={(route, navigator) => {
 
